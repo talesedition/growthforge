@@ -303,7 +303,7 @@ body {
     color: var(--ouro-forjado);
 }
 
-/* HERO STATS - Correção espaço vazio */
+/* HERO STATS */
 .hero-stats {
     display: flex;
     align-items: center;
@@ -364,12 +364,6 @@ body {
     height: 50px;
     background: linear-gradient(to bottom, transparent, var(--ouro-forjado), transparent);
     flex-shrink: 0;
-}
-
-/* Ícone específico para resultados instáveis */
-.fa-chart-line-down {
-    transform: rotate(45deg);
-    display: inline-block;
 }
 
 .hero-cta {
@@ -506,7 +500,6 @@ body {
     overflow: hidden;
 }
 
-/* Correção ordem mobile - Imagem antes do texto */
 .pain-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -515,61 +508,11 @@ body {
 }
 
 .pain-visual.mobile-first {
-    display: none; /* Escondido no desktop */
+    display: none;
 }
 
 .pain-visual.desktop-only {
-    display: block; /* Visível no desktop */
-}
-
-/* Ícone de resultados instáveis - garantir que apareça */
-.pain-item .fa-arrow-trend-down {
-    font-size: 1.5rem;
-    color: var(--chama-viva);
-    margin-top: 5px;
     display: block;
-}
-
-/* Mobile: Imagem primeiro */
-@media (max-width: 992px) {
-    .pain-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-    }
-    
-    .pain-visual.mobile-first {
-        display: block;
-        order: -1; /* Força imagem primeiro */
-        margin-bottom: 20px;
-    }
-    
-    .pain-visual.desktop-only {
-        display: none; /* Esconde a imagem do desktop */
-    }
-    
-    .pain-content {
-        order: 1;
-    }
-    
-    .pain-points {
-        margin-top: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .pain-grid {
-        gap: 30px;
-    }
-    
-    .pain-visual.mobile-first {
-        margin-bottom: 10px;
-    }
-    
-    .pain-visual.mobile-first img {
-        max-height: 300px;
-        object-fit: contain;
-    }
 }
 
 .pain-item {
@@ -1353,14 +1296,21 @@ body {
         flex-direction: column;
     }
     
+    /* MOBILE: Seta girada 90° com animação vertical pura */
     .process-arrow {
         transform: rotate(90deg);
         animation: pulseArrowVertical 2s infinite;
     }
     
     @keyframes pulseArrowVertical {
-        0%, 100% { opacity: 0.5; transform: rotate(90deg) translateY(0); }
-        50% { opacity: 1; transform: rotate(90deg) translateY(10px); }
+        0%, 100% { 
+            opacity: 0.5; 
+            transform: rotate(90deg) translateX(0); 
+        }
+        50% { 
+            opacity: 1; 
+            transform: rotate(90deg) translateX(10px); 
+        }
     }
     
     .hero-stats {
@@ -1380,12 +1330,26 @@ body {
     /* Pain section mobile - imagem primeiro */
     .pain-grid {
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
+        gap: 40px;
     }
     
-    .pain-visual {
+    .pain-visual.mobile-first {
+        display: block;
         order: -1;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
+    }
+    
+    .pain-visual.desktop-only {
+        display: none;
+    }
+    
+    .pain-content {
+        order: 1;
+    }
+    
+    .pain-points {
+        margin-top: 20px;
     }
 }
 
@@ -1465,16 +1429,6 @@ body {
     
     .stat-item {
         width: 100%;
-    }
-    
-    .pain-grid {
-        display: flex;
-        flex-direction: column-reverse;
-    }
-    
-    .pain-visual {
-        order: -1;
-        margin-bottom: 40px;
     }
 }
 
