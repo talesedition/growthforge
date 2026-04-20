@@ -2,24 +2,27 @@
 <html lang="pt-BR">
 <head>
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-K3TKJ8NL');</script>
-    <!-- End Google Tag Manager -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    (function(w,d,s,l,i){
+        w[l]=w[l]||[];
+        w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s), dl=l!='dataLayer' ? '&l='+l : '';
+        j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K3TKJ8NL');
+    </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Growth Forje | Pré-Qualificação</title>
     <meta name="description" content="Pré-qualificação para novos clientes Growth Forje - Gestão de Tráfego e Design">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -33,28 +36,13 @@
             --metal-escuro: #1a1a1a;
             --cinza-texto: #e0e0e0;
             --cinza-medio: #888;
+            --erro: #ff4444;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--brasa-profunda) var(--carvao-ardente); }
+        body { font-family: 'Montserrat', sans-serif; background: var(--carvao-ardente); color: var(--cinza-texto); min-height: 100vh; display: flex; flex-direction: column; }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--carvao-ardente);
-            color: var(--cinza-texto);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Header */
         .header {
             background: rgba(10, 10, 10, 0.95);
             border-bottom: 2px solid var(--ouro-forjado);
@@ -62,8 +50,8 @@
             text-align: center;
             position: relative;
             z-index: 10;
+            flex-shrink: 0;
         }
-
         .header::after {
             content: '';
             position: absolute;
@@ -74,19 +62,8 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--chama-viva), transparent);
         }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 48px;
-        }
-
+        .logo-container { display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .logo-icon { width: 40px; height: 48px; }
         .logo-text {
             font-family: 'Cinzel', serif;
             font-weight: 900;
@@ -97,15 +74,8 @@
             background-clip: text;
             letter-spacing: 2px;
         }
+        .header-subtitle { color: var(--cinza-medio); font-size: 0.85rem; margin-top: 8px; letter-spacing: 1px; }
 
-        .header-subtitle {
-            color: var(--cinza-medio);
-            font-size: 0.85rem;
-            margin-top: 8px;
-            letter-spacing: 1px;
-        }
-
-        /* Chat Container - CORREÇÃO SCROLL */
         .chat-container {
             flex: 1;
             max-width: 800px;
@@ -118,9 +88,14 @@
             overflow-y: auto;
             max-height: calc(100vh - 200px);
             scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--brasa-profunda) rgba(255,255,255,0.03);
         }
+        .chat-container::-webkit-scrollbar { width: 6px; }
+        .chat-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.03); border-radius: 3px; margin: 4px 0; }
+        .chat-container::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--brasa-profunda), var(--ouro-forjado)); border-radius: 3px; }
+        .chat-container::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--chama-viva), var(--brasa-clara)); }
 
-        /* Messages */
         .message {
             display: flex;
             align-items: flex-start;
@@ -130,14 +105,15 @@
             animation: fadeInUp 0.5s forwards;
             flex-shrink: 0;
         }
-
-        .message.bot {
-            align-self: flex-start;
-        }
-
-        .message.user {
-            align-self: flex-end;
-            flex-direction: row-reverse;
+        .message.bot { align-self: flex-start; }
+        .message.user { align-self: flex-end; flex-direction: row-reverse; }
+        .message.error { align-self: flex-start; padding-left: 48px; }
+        .message.error .message-bubble {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid rgba(255, 68, 68, 0.4);
+            color: #ff8888;
+            font-size: 0.85rem;
+            padding: 10px 16px;
         }
 
         .message-avatar {
@@ -150,16 +126,8 @@
             flex-shrink: 0;
             font-size: 1rem;
         }
-
-        .message.bot .message-avatar {
-            background: linear-gradient(135deg, var(--brasa-profunda), var(--chama-viva));
-            color: white;
-        }
-
-        .message.user .message-avatar {
-            background: linear-gradient(135deg, var(--ouro-forjado), var(--brasa-clara));
-            color: var(--carvao-ardente);
-        }
+        .message.bot .message-avatar { background: linear-gradient(135deg, var(--brasa-profunda), var(--chama-viva)); color: white; }
+        .message.user .message-avatar { background: linear-gradient(135deg, var(--ouro-forjado), var(--brasa-clara)); color: var(--carvao-ardente); }
 
         .message-bubble {
             max-width: 70%;
@@ -169,21 +137,18 @@
             line-height: 1.6;
             position: relative;
         }
-
         .message.bot .message-bubble {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(201, 169, 97, 0.3);
             color: var(--cinza-texto);
             border-bottom-left-radius: 4px;
         }
-
         .message.user .message-bubble {
             background: linear-gradient(135deg, var(--ouro-forjado), var(--brasa-profunda));
             color: white;
             border-bottom-right-radius: 4px;
         }
 
-        /* Options/Buttons */
         .options-container {
             display: flex;
             flex-wrap: wrap;
@@ -191,8 +156,8 @@
             margin-top: 10px;
             padding-left: 48px;
             flex-shrink: 0;
+            animation: fadeInUp 0.3s forwards;
         }
-
         .option-btn {
             background: linear-gradient(135deg, var(--brasa-profunda), var(--chama-viva));
             color: white;
@@ -206,18 +171,8 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(212, 102, 44, 0.3);
         }
+        .option-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 102, 44, 0.5); }
 
-        .option-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 102, 44, 0.5);
-        }
-
-        .option-btn.selected {
-            background: linear-gradient(135deg, var(--ouro-forjado), var(--brasa-clara));
-            box-shadow: 0 4px 15px rgba(201, 169, 97, 0.4);
-        }
-
-        /* Input Field */
         .input-container {
             display: none;
             align-items: center;
@@ -227,7 +182,6 @@
             animation: fadeInUp 0.3s forwards;
             flex-shrink: 0;
         }
-
         .input-field {
             flex: 1;
             background: rgba(255, 255, 255, 0.05);
@@ -240,15 +194,9 @@
             outline: none;
             transition: all 0.3s ease;
         }
-
-        .input-field:focus {
-            border-color: var(--ouro-forjado);
-            box-shadow: 0 0 10px rgba(201, 169, 97, 0.2);
-        }
-
-        .input-field::placeholder {
-            color: var(--cinza-medio);
-        }
+        .input-field:focus { border-color: var(--ouro-forjado); box-shadow: 0 0 10px rgba(201, 169, 97, 0.2); }
+        .input-field::placeholder { color: var(--cinza-medio); }
+        .input-field.erro { border-color: var(--erro); box-shadow: 0 0 10px rgba(255, 68, 68, 0.2); }
 
         .send-btn {
             width: 45px;
@@ -264,13 +212,8 @@
             transition: all 0.3s ease;
             flex-shrink: 0;
         }
+        .send-btn:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(201, 169, 97, 0.4); }
 
-        .send-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(201, 169, 97, 0.4);
-        }
-
-        /* Progress Bar */
         .progress-container {
             position: fixed;
             top: 0;
@@ -280,7 +223,6 @@
             background: rgba(255, 255, 255, 0.1);
             z-index: 1000;
         }
-
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, var(--chama-viva), var(--ouro-forjado));
@@ -288,13 +230,7 @@
             transition: width 0.5s ease;
         }
 
-        /* Loading */
-        .typing-indicator {
-            display: flex;
-            gap: 4px;
-            padding: 10px 15px;
-        }
-
+        .typing-indicator { display: flex; gap: 4px; padding: 10px 15px; }
         .typing-dot {
             width: 8px;
             height: 8px;
@@ -302,42 +238,22 @@
             border-radius: 50%;
             animation: typing 1.4s infinite;
         }
-
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-        /* Final Screen */
         .final-screen {
             display: none;
             text-align: center;
             padding: 60px 20px;
             animation: fadeInUp 0.8s forwards;
             flex: 1;
-            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-
-        .final-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .final-title {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            color: var(--ouro-forjado);
-            margin-bottom: 15px;
-        }
-
-        .final-text {
-            color: var(--cinza-medio);
-            margin-bottom: 30px;
-            line-height: 1.7;
-            max-width: 600px;
-        }
-
+        .final-icon { font-size: 4rem; margin-bottom: 20px; }
+        .final-title { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--ouro-forjado); margin-bottom: 15px; }
+        .final-text { color: var(--cinza-medio); margin-bottom: 30px; line-height: 1.7; max-width: 600px; }
         .whatsapp-final-btn {
             display: inline-flex;
             align-items: center;
@@ -355,30 +271,9 @@
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
         }
+        .whatsapp-final-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5); }
+        .whatsapp-final-btn i { font-size: 1.5rem; }
 
-        .whatsapp-final-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
-        }
-
-        .whatsapp-final-btn i {
-            font-size: 1.5rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-10px); }
-        }
-
-        /* Footer */
         .footer {
             text-align: center;
             padding: 20px;
@@ -387,58 +282,28 @@
             font-size: 0.8rem;
             flex-shrink: 0;
         }
+        .footer-brand { font-family: 'Cinzel', serif; color: var(--ouro-forjado); margin-bottom: 5px; }
 
-        .footer-brand {
-            font-family: 'Cinzel', serif;
-            color: var(--ouro-forjado);
-            margin-bottom: 5px;
-        }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes typing { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-10px); } }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .chat-container {
-                padding: 20px 15px;
-                max-height: calc(100vh - 180px);
-            }
-
-            .message-bubble {
-                max-width: 85%;
-                padding: 12px 16px;
-                font-size: 0.9rem;
-            }
-
-            .options-container {
-                padding-left: 0;
-            }
-
-            .input-container {
-                padding-left: 0;
-            }
-
-            .option-btn {
-                padding: 10px 18px;
-                font-size: 0.85rem;
-            }
-
-            .final-title {
-                font-size: 1.5rem;
-            }
+            .chat-container { padding: 20px 15px; max-height: calc(100vh - 180px); }
+            .message-bubble { max-width: 85%; padding: 12px 16px; font-size: 0.9rem; }
+            .options-container, .input-container { padding-left: 0; }
+            .option-btn { padding: 10px 18px; font-size: 0.85rem; }
+            .final-title { font-size: 1.5rem; }
         }
     </style>
 <base target="_blank">
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3TKJ8NL"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3TKJ8NL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-    <!-- Progress Bar -->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <!-- Header -->
     <header class="header">
         <div class="logo-container">
             <svg class="logo-icon" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
@@ -469,140 +334,124 @@
         <p class="header-subtitle">Forjando Impérios | Pré-Qualificação de Leads</p>
     </header>
 
-    <!-- Chat Container -->
-    <div class="chat-container" id="chatContainer">
-        <!-- Messages will be inserted here by JavaScript -->
-    </div>
+    <div class="chat-container" id="chatContainer"></div>
 
-    <!-- Final Screen -->
     <div class="final-screen" id="finalScreen">
         <div class="final-icon">🔥</div>
         <h2 class="final-title">Pré-Qualificação Concluída!</h2>
         <p class="final-text">
-            Obrigado pelas informações! Nossa equipe já recebeu seus dados e<br>
-            em breve entrará em contato. Clique abaixo para falar diretamente no WhatsApp.
+            Obrigado, <strong id="finalNome"></strong>! Seu perfil foi enviado.<br>
+            Clique abaixo para falar diretamente com nosso time no WhatsApp.
         </p>
-        <a href="https://wa.me/5522988231811" target="_blank" class="whatsapp-final-btn" id="whatsappFinalBtn">
+        <a href="#" target="_blank" class="whatsapp-final-btn" id="whatsappFinalBtn">
             <i class="fab fa-whatsapp"></i>
             <span>Falar no WhatsApp</span>
         </a>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-brand">GROWTH FORJE</div>
         <p>Forjado no Fogo | Impérios em Ascensão</p>
     </footer>
 
     <script>
-// ===================================
-// CONFIG
-// ===================================
-
 const chatContainer = document.getElementById('chatContainer');
 const progressBar = document.getElementById('progressBar');
 const finalScreen = document.getElementById('finalScreen');
+const finalNome = document.getElementById('finalNome');
+const whatsappFinalBtn = document.getElementById('whatsappFinalBtn');
 
-let leadData = {
-    nome: '',
-    empresa: '',
-    whatsapp: '',
-    email: '',
-    faturamento: '',
-    investimento: ''
-};
-
+let leadData = { nome: '', empresa: '', whatsapp: '', email: '', faturamento: '', investimento: '' };
 let currentStep = 0;
 const totalSteps = 6;
 let messageIndex = 0;
 
-// ===================================
-// FLUXO OTIMIZADO (HIGH CONVERSION)
-// ===================================
+function validarWhatsApp(numero) {
+    const limpo = numero.replace(/\D/g, '');
+    if (limpo.length < 10) return { valido: false, msg: 'Número incompleto. Digite DDD + número completo (mínimo 10 dígitos).' };
+    if (limpo.length > 11) return { valido: false, msg: 'Número muito longo. Verifique se não digitou algo a mais.' };
+    return { valido: true, formatado: limpo };
+}
+
+function validarEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.includes('@')) return { valido: false, msg: 'E-mail precisa conter @.' };
+    if (!regex.test(email)) return { valido: false, msg: 'E-mail inválido. Use o formato: nome@dominio.com' };
+    return { valido: true };
+}
 
 const chatFlow = [
     {
         type: 'bot',
-        text: '👋 Fala! Vou ser direto com você.',
-        delay: 600
-    },
-    {
-        type: 'bot',
-        text: 'Se fizer sentido, a gente pode te ajudar a aumentar seu faturamento com previsibilidade.',
-        delay: 800
-    },
-    {
-        type: 'bot',
-        text: 'Mas antes, preciso entender rápido o seu cenário.',
-        delay: 800
+        text: 'Fala! Sou da Growth Forje. Vou ser direto: pra saber se consigo te ajudar a escalar, preciso de 4 dados. Leva menos de 1 minuto. Bora?',
+        delay: 500
     },
     {
         type: 'bot',
         text: 'Qual seu nome?',
         input: 'nome',
-        placeholder: 'Digite seu nome'
+        placeholder: 'Digite seu nome',
+        validar: (val) => {
+            if (val.trim().length < 2) return { valido: false, msg: 'Nome muito curto. Digite seu nome completo.' };
+            return { valido: true };
+        }
     },
     {
         type: 'bot',
-        text: 'Perfeito, {nome}. Qual é o nome da sua empresa?',
+        text: 'Qual o nome da sua empresa?',
         input: 'empresa',
-        placeholder: 'Nome da empresa'
+        placeholder: 'Nome da empresa',
+        validar: (val) => {
+            if (val.trim().length < 2) return { valido: false, msg: 'Nome da empresa muito curto.' };
+            return { valido: true };
+        }
     },
     {
         type: 'bot',
-        text: 'Hoje, em média, quanto você fatura por mês?',
+        text: 'Faturamento mensal médio?',
         options: [
-            { value: '10k-15K', label: 'R$ 10K - R$ 15K' },
-            { value: '10k-30k', label: 'R$ 15k – R$ 30k' },
-            { value: '30k-100k', label: 'R$ 30k – R$ 100k' },
-            { value: '100k+', label: 'Acima de R$ 100k' }
+            { value: 'Ate 10k', label: 'Até R$ 10K' },
+            { value: '10k-30k', label: 'R$ 10K – R$ 30K' },
+            { value: '30k-100k', label: 'R$ 30K – R$ 100K' },
+            { value: '100k+', label: 'Acima de R$ 100K' }
         ],
         field: 'faturamento'
     },
     {
         type: 'bot',
-        text: 'E quanto você investe (ou pretende investir) em tráfego?',
+        text: 'Quanto você investe (ou pode investir) em tráfego pago por mês?',
         options: [
-            { value: '3k-5k', label: 'R$ 3k – R$ 5k' },
-            { value: '5k-10k', label: 'R$ 5k – R$ 10k' },
-            { value: '10k-30k', label: 'R$ 10k – R$ 30k' },
-            { value: '30k+', label: 'Acima de R$ 30k' }
+            { value: 'Ate 3k', label: 'Até R$ 3K' },
+            { value: '3k-10k', label: 'R$ 3K – R$ 10K' },
+            { value: '10k-30k', label: 'R$ 10K – R$ 30K' },
+            { value: '30k+', label: 'Acima de R$ 30K' }
         ],
         field: 'investimento'
     },
     {
         type: 'bot',
-        text: 'Boa. Agora me passa seu WhatsApp pra gente falar direto.',
+        text: 'WhatsApp com DDD. Só isso, sem pontos ou traços:',
         input: 'whatsapp',
-        placeholder: '(XX) XXXXX-XXXX'
+        placeholder: '11999999999',
+        validar: (val) => validarWhatsApp(val)
     },
     {
         type: 'bot',
-        text: 'E um e-mail (caso a gente não consiga te chamar no WhatsApp)',
+        text: 'E-mail pra contato:',
         input: 'email',
-        placeholder: 'seu@email.com'
+        placeholder: 'seu@email.com',
+        validar: (val) => validarEmail(val)
     },
     {
         type: 'bot',
-        text: 'Perfeito. Já estou analisando seu perfil...',
-        delay: 800
+        text: 'Perfeito. Analisando seu perfil...',
+        delay: 1200
     }
 ];
 
-// ===================================
-// FUNÇÕES - CORREÇÃO SCROLL AUTOMÁTICO
-// ===================================
-
 function scrollToBottom() {
     requestAnimationFrame(() => {
-        setTimeout(() => {
-            const lastElement = chatContainer.lastElementChild;
-            if (lastElement) {
-                lastElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
-            }
-            // Fallback: scroll o container para o final
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }, 100);
+        setTimeout(() => { chatContainer.scrollTop = chatContainer.scrollHeight; }, 50);
     });
 }
 
@@ -615,33 +464,31 @@ function replaceVariables(text) {
     return text.replace('{nome}', leadData.nome || '');
 }
 
-function addMessage(type, text) {
+function addMessage(type, text, isError = false) {
     return new Promise(resolve => {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${type}`;
+        if (isError) messageDiv.classList.add('error');
 
-        const avatar = document.createElement('div');
-        avatar.className = 'message-avatar';
-        avatar.innerHTML = type === 'bot'
-            ? '<i class="fas fa-fire"></i>'
-            : '<i class="fas fa-user"></i>';
+        if (!isError) {
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.innerHTML = type === 'bot' ? '<i class="fas fa-fire"></i>' : '<i class="fas fa-user"></i>';
+            messageDiv.appendChild(avatar);
+        }
 
         const bubble = document.createElement('div');
         bubble.className = 'message-bubble';
         bubble.textContent = replaceVariables(text);
 
-        messageDiv.appendChild(avatar);
         messageDiv.appendChild(bubble);
         chatContainer.appendChild(messageDiv);
-
-        // CORREÇÃO: Scroll automático garantido
         scrollToBottom();
-
         resolve();
     });
 }
 
-function addTyping(delay = 800) {
+function addTyping(delay = 700) {
     return new Promise(resolve => {
         const typingDiv = document.createElement('div');
         typingDiv.className = 'message bot';
@@ -653,29 +500,21 @@ function addTyping(delay = 800) {
 
         const bubble = document.createElement('div');
         bubble.className = 'message-bubble';
-        bubble.innerHTML = `
-            <div class="typing-indicator">
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-            </div>
-        `;
+        bubble.innerHTML = `<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
 
         typingDiv.appendChild(avatar);
         typingDiv.appendChild(bubble);
         chatContainer.appendChild(typingDiv);
-
-        // CORREÇÃO: Scroll automático garantido
         scrollToBottom();
 
-        setTimeout(() => {
-            typingDiv.remove();
-            resolve();
-        }, delay);
+        setTimeout(() => { typingDiv.remove(); resolve(); }, delay);
     });
 }
 
-function addInput(field, placeholder) {
+function addInput(field, placeholder, validador) {
+    const old = document.querySelector('.input-container');
+    if (old) old.remove();
+
     const container = document.createElement('div');
     container.className = 'input-container';
     container.style.display = 'flex';
@@ -684,38 +523,52 @@ function addInput(field, placeholder) {
     input.className = 'input-field';
     input.placeholder = placeholder;
     input.id = 'input';
+    
+    if (field === 'whatsapp') { input.inputMode = 'numeric'; input.type = 'tel'; }
+    else if (field === 'email') { input.type = 'email'; }
+    else { input.type = 'text'; }
 
     const btn = document.createElement('button');
     btn.className = 'send-btn';
     btn.innerHTML = '→';
 
-    btn.onclick = () => sendInput(field);
-    input.addEventListener('keypress', e => {
-        if (e.key === 'Enter') sendInput(field);
-    });
+    const processar = () => {
+        const value = input.value.trim();
+        if (!value) return;
+
+        if (validador) {
+            const resultado = validador(value);
+            if (!resultado.valido) {
+                input.classList.add('erro');
+                input.value = '';
+                input.placeholder = resultado.msg;
+                addMessage('bot', resultado.msg, true);
+                scrollToBottom();
+                return;
+            }
+        }
+
+        input.classList.remove('erro');
+        container.remove();
+        document.querySelectorAll('.message.error').forEach(el => el.remove());
+
+        addMessage('user', value).then(() => {
+            leadData[field] = value;
+            currentStep++;
+            updateProgress();
+            setTimeout(processNextMessage, 300);
+        });
+    };
+
+    btn.onclick = processar;
+    input.addEventListener('keypress', e => { if (e.key === 'Enter') processar(); });
 
     container.appendChild(input);
     container.appendChild(btn);
     chatContainer.appendChild(container);
-
-    // CORREÇÃO: Scroll automático garantido + focus
     scrollToBottom();
-    setTimeout(() => input.focus(), 200);
-}
-
-function sendInput(field) {
-    const input = document.getElementById('input');
-    const value = input.value.trim();
-    if (!value) return;
-
-    input.parentElement.remove();
-
-    addMessage('user', value).then(() => {
-        leadData[field] = value;
-        currentStep++;
-        updateProgress();
-        setTimeout(processNextMessage, 400);
-    });
+    
+    setTimeout(() => { input.focus(); setTimeout(scrollToBottom, 300); }, 100);
 }
 
 function addOptions(options, field) {
@@ -733,22 +586,15 @@ function addOptions(options, field) {
                 leadData[field] = opt.value;
                 currentStep++;
                 updateProgress();
-                setTimeout(processNextMessage, 400);
+                setTimeout(processNextMessage, 300);
             });
         };
-
         container.appendChild(btn);
     });
 
     chatContainer.appendChild(container);
-
-    // CORREÇÃO: Scroll automático garantido
     scrollToBottom();
 }
-
-// ===================================
-// FLOW ENGINE
-// ===================================
 
 async function processNextMessage() {
     if (messageIndex >= chatFlow.length) {
@@ -757,91 +603,114 @@ async function processNextMessage() {
     }
 
     const msg = chatFlow[messageIndex];
-
-    await addTyping(msg.delay || 700);
-    await addMessage('bot', msg.text);
-
     messageIndex++;
 
-    if (msg.input) {
-        addInput(msg.input, msg.placeholder);
-        return;
-    }
+    if (msg.type === 'bot') {
+        await addTyping(msg.delay || 600);
+        await addMessage('bot', msg.text);
 
-    if (msg.options) {
-        addOptions(msg.options, msg.field);
-        return;
-    }
+        if (msg.input) {
+            addInput(msg.input, msg.placeholder, msg.validar);
+            return;
+        }
 
-    processNextMessage();
+        if (msg.options) {
+            addOptions(msg.options, msg.field);
+            return;
+        }
+
+        if (messageIndex >= chatFlow.length) {
+            setTimeout(finish, 800);
+        } else {
+            setTimeout(processNextMessage, 200);
+        }
+    }
 }
 
 // ===================================
-// FINAL - ENVIO AJAX + EVENTO GTM
+// ENVIO CORRIGIDO - FORMDATA EM VEZ DE JSON
 // ===================================
 
 function finish() {
     progressBar.style.width = '100%';
 
-    // CORREÇÃO: Envia evento de conversão para o GTM/DataLayer
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'qualificacao_completa', {
-            'event_category': 'lead',
-            'event_label': 'pre_qualificacao',
-            'value': 1
-        });
-    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        event: 'lead_submit_attempt',
+        lead_nome: leadData.nome,
+        lead_empresa: leadData.empresa
+    });
 
-    // Push para DataLayer do GTM
-    if (window.dataLayer) {
+    sendLeadAjax()
+    .then(() => {
         window.dataLayer.push({
-            'event': 'qualificacao_completa',
-            'lead_nome': leadData.nome,
-            'lead_empresa': leadData.empresa,
-            'lead_faturamento': leadData.faturamento,
-            'lead_investimento': leadData.investimento
+            event: 'generate_lead',
+            currency: 'BRL',
+            value: 1,
+            lead_nome: leadData.nome,
+            lead_empresa: leadData.empresa,
+            lead_whatsapp: leadData.whatsapp,
+            lead_email: leadData.email,
+            lead_faturamento: leadData.faturamento,
+            lead_investimento: leadData.investimento,
+            lead_id: Date.now()
         });
-    }
-
-    // Envia os dados via AJAX
-    sendLeadAjax().then(() => {
-        chatContainer.style.display = 'none';
-        finalScreen.style.display = 'flex';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }).catch(err => {
+        showFinalScreen();
+    })
+    .catch(err => {
         console.error('Erro ao enviar:', err);
-        chatContainer.style.display = 'none';
-        finalScreen.style.display = 'flex';
+        // Mesmo com erro no e-mail, mostra o WhatsApp (não perde o lead)
+        showFinalScreen();
     });
 }
 
 function sendLeadAjax() {
+    // FormSubmit.co funciona melhor com FormData do que JSON
+    const formData = new FormData();
+    
+    // Dados do lead
+    formData.append('Nome', leadData.nome);
+    formData.append('Empresa', leadData.empresa);
+    formData.append('WhatsApp', leadData.whatsapp);
+    formData.append('Email', leadData.email);
+    formData.append('Faturamento', leadData.faturamento);
+    formData.append('Investimento', leadData.investimento);
+    formData.append('Data_Hora', new Date().toLocaleString('pt-BR'));
+    formData.append('Origem', 'Site Growth Forje - Pré-Qualificação');
+    
+    // Configurações obrigatórias do FormSubmit.co
+    formData.append('_captcha', 'false');           // Desativa captcha pra não bloquear
+    formData.append('_template', 'table');          // Formatação em tabela no e-mail
+    formData.append('_subject', `Novo Lead: ${leadData.nome} - ${leadData.empresa}`);
+    formData.append('_replyto', leadData.email);    // Permite responder direto pro lead
+
     return fetch('https://formsubmit.co/ajax/growthforje@gmail.com', {
         method: 'POST',
+        body: formData,
         headers: {
-            'Content-Type': 'application/json',
             'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-            nome: leadData.nome,
-            empresa: leadData.empresa,
-            whatsapp: leadData.whatsapp,
-            email: leadData.email,
-            faturamento: leadData.faturamento,
-            investimento: leadData.investimento,
-            data_hora: new Date().toLocaleString('pt-BR'),
-            origem: 'Site Growth Forje - Pré-Qualificação',
-            _subject: '🚨 NOVO LEAD - Growth Forje',
-            _template: 'table',
-            _captcha: 'false'
-        })
+        }
+        // IMPORTANTE: NÃO colocar 'Content-Type'. O browser seta automaticamente com o boundary correto para FormData
+    }).then(res => {
+        if (!res.ok) throw new Error('Erro no envio: ' + res.status);
+        return res.json();
     });
 }
 
-// INIT
-setTimeout(processNextMessage, 500);
-updateProgress();
+function showFinalScreen() {
+    chatContainer.style.display = 'none';
+    finalScreen.style.display = 'flex';
+    finalNome.textContent = leadData.nome || '';
+    
+    const texto = `Olá! Sou ${leadData.nome} da ${leadData.empresa}. Acabei de fazer a pré-qualificação no site e quero saber mais sobre a Growth Forje.`;
+    const encoded = encodeURIComponent(texto);
+    whatsappFinalBtn.href = `https://wa.me/5522988231811?text=${encoded}`;
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-</script>
+updateProgress();
+setTimeout(processNextMessage, 400);
+    </script>
 </body>
 </html>
