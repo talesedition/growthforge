@@ -9,32 +9,6 @@
     })(window,document,'script','dataLayer','GTM-K3TKJ8NL');</script>
     <!-- End Google Tag Manager -->
 
-    <!-- Google tag (gtag.js) - APENAS NA PÁGINA DE CONVERSÃO -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6N52DJNLE"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-L6N52DJNLE');
-
-    // Evento de conversão quando a página carrega (lead chegou na página de qualificação)
-    gtag('event', 'page_view_qualificacao', {
-        'event_category': 'conversion',
-        'event_label': 'inicio_qualificacao',
-        'value': 1
-    });
-    </script>
-
-        <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6N52DJNLE"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-L6N52DJNLE');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Growth Forje | Pré-Qualificação</title>
@@ -67,6 +41,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             background: var(--carvao-ardente);
@@ -83,6 +61,7 @@
             padding: 20px 0;
             text-align: center;
             position: relative;
+            z-index: 10;
         }
 
         .header::after {
@@ -126,7 +105,7 @@
             letter-spacing: 1px;
         }
 
-        /* Chat Container */
+        /* Chat Container - CORREÇÃO SCROLL */
         .chat-container {
             flex: 1;
             max-width: 800px;
@@ -136,6 +115,9 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+            scroll-behavior: smooth;
         }
 
         /* Messages */
@@ -146,6 +128,7 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.5s forwards;
+            flex-shrink: 0;
         }
 
         .message.bot {
@@ -207,6 +190,7 @@
             gap: 10px;
             margin-top: 10px;
             padding-left: 48px;
+            flex-shrink: 0;
         }
 
         .option-btn {
@@ -241,6 +225,7 @@
             margin-top: 10px;
             padding-left: 48px;
             animation: fadeInUp 0.3s forwards;
+            flex-shrink: 0;
         }
 
         .input-field {
@@ -277,6 +262,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         .send-btn:hover {
@@ -326,6 +312,11 @@
             text-align: center;
             padding: 60px 20px;
             animation: fadeInUp 0.8s forwards;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .final-icon {
@@ -344,6 +335,7 @@
             color: var(--cinza-medio);
             margin-bottom: 30px;
             line-height: 1.7;
+            max-width: 600px;
         }
 
         .whatsapp-final-btn {
@@ -393,6 +385,7 @@
             border-top: 1px solid rgba(201, 169, 97, 0.1);
             color: var(--cinza-medio);
             font-size: 0.8rem;
+            flex-shrink: 0;
         }
 
         .footer-brand {
@@ -405,6 +398,7 @@
         @media (max-width: 768px) {
             .chat-container {
                 padding: 20px 15px;
+                max-height: calc(100vh - 180px);
             }
 
             .message-bubble {
@@ -596,8 +590,21 @@ const chatFlow = [
 ];
 
 // ===================================
-// FUNÇÕES
+// FUNÇÕES - CORREÇÃO SCROLL AUTOMÁTICO
 // ===================================
+
+function scrollToBottom() {
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            const lastElement = chatContainer.lastElementChild;
+            if (lastElement) {
+                lastElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }
+            // Fallback: scroll o container para o final
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }, 100);
+    });
+}
 
 function updateProgress() {
     const progress = ((currentStep) / totalSteps) * 100;
@@ -627,10 +634,8 @@ function addMessage(type, text) {
         messageDiv.appendChild(bubble);
         chatContainer.appendChild(messageDiv);
 
-        // Scroll suave e automático para a última mensagem
-        setTimeout(() => {
-            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        }, 100);
+        // CORREÇÃO: Scroll automático garantido
+        scrollToBottom();
 
         resolve();
     });
@@ -660,10 +665,8 @@ function addTyping(delay = 800) {
         typingDiv.appendChild(bubble);
         chatContainer.appendChild(typingDiv);
 
-        // Scroll automático para o indicador de digitação
-        setTimeout(() => {
-            typingDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        }, 100);
+        // CORREÇÃO: Scroll automático garantido
+        scrollToBottom();
 
         setTimeout(() => {
             typingDiv.remove();
@@ -695,11 +698,9 @@ function addInput(field, placeholder) {
     container.appendChild(btn);
     chatContainer.appendChild(container);
 
-    // Scroll automático para o campo de input
-    setTimeout(() => {
-        container.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        input.focus();
-    }, 100);
+    // CORREÇÃO: Scroll automático garantido + focus
+    scrollToBottom();
+    setTimeout(() => input.focus(), 200);
 }
 
 function sendInput(field) {
@@ -741,10 +742,8 @@ function addOptions(options, field) {
 
     chatContainer.appendChild(container);
 
-    // Scroll automático para as opções
-    setTimeout(() => {
-        container.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    }, 100);
+    // CORREÇÃO: Scroll automático garantido
+    scrollToBottom();
 }
 
 // ===================================
@@ -778,25 +777,41 @@ async function processNextMessage() {
 }
 
 // ===================================
-// FINAL - ENVIO AJAX SEM REDIRECIONAMENTO
+// FINAL - ENVIO AJAX + EVENTO GTM
 // ===================================
 
 function finish() {
     progressBar.style.width = '100%';
-    
-    // Envia os dados via AJAX sem redirecionar
+
+    // CORREÇÃO: Envia evento de conversão para o GTM/DataLayer
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'qualificacao_completa', {
+            'event_category': 'lead',
+            'event_label': 'pre_qualificacao',
+            'value': 1
+        });
+    }
+
+    // Push para DataLayer do GTM
+    if (window.dataLayer) {
+        window.dataLayer.push({
+            'event': 'qualificacao_completa',
+            'lead_nome': leadData.nome,
+            'lead_empresa': leadData.empresa,
+            'lead_faturamento': leadData.faturamento,
+            'lead_investimento': leadData.investimento
+        });
+    }
+
+    // Envia os dados via AJAX
     sendLeadAjax().then(() => {
-        // Mostra a tela final com botão do WhatsApp
         chatContainer.style.display = 'none';
-        finalScreen.style.display = 'block';
-        
-        // Scroll para o topo para ver a mensagem de sucesso
+        finalScreen.style.display = 'flex';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }).catch(err => {
         console.error('Erro ao enviar:', err);
-        // Mesmo com erro, mostra a tela final
         chatContainer.style.display = 'none';
-        finalScreen.style.display = 'block';
+        finalScreen.style.display = 'flex';
     });
 }
 
