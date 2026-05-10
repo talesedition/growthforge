@@ -4,14 +4,14 @@
 // ===================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     // ===================================
     // SPARKS ANIMATION
     // ===================================
     function createSparks() {
         const container = document.getElementById('sparks');
         const sparkCount = 15;
-        
+
         for (let i = 0; i < sparkCount; i++) {
             setTimeout(() => {
                 const spark = document.createElement('div');
@@ -20,23 +20,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 spark.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 spark.style.animationDelay = Math.random() * 2 + 's';
                 container.appendChild(spark);
-                
+
                 setTimeout(() => {
                     spark.remove();
                 }, 5000);
             }, i * 300);
         }
     }
-    
+
     // Recriar faíscas periodicamente
     createSparks();
     setInterval(createSparks, 8000);
-    
+
     // ===================================
     // NAVBAR SCROLL EFFECT
     // ===================================
     const navbar = document.getElementById('navbar');
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -44,16 +44,16 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.classList.remove('scrolled');
         }
     });
-    
+
     // ===================================
     // MOBILE MENU
     // ===================================
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
-    
+
     mobileMenuBtn.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        
+
         const icon = mobileMenuBtn.querySelector('i');
         if (navLinks.classList.contains('active')) {
             icon.classList.remove('fa-bars');
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.classList.add('fa-bars');
         }
     });
-    
+
     // Fechar menu ao clicar em link
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenuBtn.querySelector('i').classList.add('fa-bars');
         });
     });
-    
+
     // ===================================
     // SMOOTH SCROLL
     // ===================================
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // ===================================
     // COUNTER ANIMATION
     // ===================================
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
             element.textContent = current.toFixed(1) + suffix;
         }, 30);
     }
-    
+
     // Intersection Observer para counters
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -119,12 +119,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     const statsSection = document.querySelector('.hero-stats');
     if (statsSection) {
         counterObserver.observe(statsSection);
     }
-    
+
     // ===================================
     // RESULT COUNTERS
     // ===================================
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const target = parseFloat(counter.getAttribute('data-target'));
                 let current = 0;
                 const increment = target / 50;
-                
+
                 const timer = setInterval(() => {
                     current += increment;
                     if (current >= target) {
@@ -145,21 +145,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     counter.textContent = current.toFixed(1);
                 }, 30);
-                
+
                 resultObserver.unobserve(counter);
             }
         });
     });
-    
+
     resultCounters.forEach(counter => {
         resultObserver.observe(counter);
     });
-    
+
     // ===================================
     // SCROLL REVEAL ANIMATION
     // ===================================
-    const revealElements = document.querySelectorAll('.solution-card, .service-card, .process-step, .team-card, .result-card, .pain-item');
-    
+    const revealElements = document.querySelectorAll(
+        '.solution-card, .service-card, .process-step, .team-card, .result-card, .pain-item, .niche-item, .testimonial-card'
+    );
+
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
@@ -173,23 +175,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }, {
         threshold: 0.1
     });
-    
+
     revealElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         revealObserver.observe(el);
     });
-    
+
     // ===================================
     // WHATSAPP FLOAT BUTTON VISIBILITY
     // ===================================
     const whatsappFloat = document.getElementById('whatsappFloat');
     let lastScrollTop = 0;
-    
+
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
+
         if (scrollTop > 500) {
             whatsappFloat.style.opacity = '1';
             whatsappFloat.style.visibility = 'visible';
@@ -197,15 +199,15 @@ document.addEventListener('DOMContentLoaded', function() {
             whatsappFloat.style.opacity = '0';
             whatsappFloat.style.visibility = 'hidden';
         }
-        
+
         lastScrollTop = scrollTop;
     });
-    
+
     // Inicialmente escondido
     whatsappFloat.style.opacity = '0';
     whatsappFloat.style.visibility = 'hidden';
     whatsappFloat.style.transition = 'opacity 0.3s, visibility 0.3s, transform 0.3s';
-    
+
     // ===================================
     // PARALLAX EFFECT (desktop only)
     // ===================================
@@ -213,37 +215,37 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const parallaxElements = document.querySelectorAll('.hero-bg img, .cta-bg img');
-            
+
             parallaxElements.forEach(el => {
                 const speed = 0.5;
                 el.style.transform = `translateY(${scrolled * speed}px)`;
             });
         });
     }
-    
+
     // ===================================
     // HOVER EFFECTS ENHANCEMENT
     // ===================================
-    const cards = document.querySelectorAll('.solution-card, .service-card, .result-card');
-    
+    const cards = document.querySelectorAll('.solution-card, .service-card, .result-card, .testimonial-card');
+
     cards.forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transition = 'all 0.3s ease';
         });
     });
-    
+
     // ===================================
     // LOADING ANIMATION
     // ===================================
     window.addEventListener('load', () => {
         document.body.style.opacity = '0';
         document.body.style.transition = 'opacity 0.5s';
-        
+
         setTimeout(() => {
             document.body.style.opacity = '1';
         }, 100);
     });
-    
+
     // ===================================
     // CONSOLE BRANDING
     // ===================================
