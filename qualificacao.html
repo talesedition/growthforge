@@ -6,6 +6,9 @@
     <title>Forje Prime | Pré-Qualificação</title>
     <meta name="description" content="Pré-qualificação para novos clientes Forje Prime - Gestão de Tráfego e Design">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/logo_forge_prime.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -19,8 +22,8 @@
         body{font-family:'Montserrat',sans-serif;background:var(--carvao-ardente);color:var(--cinza-texto);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
         .header{background:rgba(10,10,10,.95);border-bottom:2px solid var(--ouro-forjado);padding:20px 0;text-align:center;position:relative;z-index:10;flex-shrink:0}
         .header::after{content:'';position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:200px;height:2px;background:linear-gradient(90deg,transparent,var(--chama-viva),transparent)}
-        .logo-container{display:flex;align-items:center;justify-content:center;gap:15px}
-        .logo-icon{width:40px;height:48px}
+        .logo-container{display:flex;align-items:center;justify-content:center;gap:12px}
+        .logo-img{height:40px;width:auto;display:block}
         .logo-text{font-family:'Cinzel',serif;font-weight:900;font-size:1.5rem;background:linear-gradient(135deg,var(--ouro-forjado),var(--brasa-clara));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:2px}
         .header-subtitle{color:var(--cinza-medio);font-size:.85rem;margin-top:8px;letter-spacing:1px}
         .chat-container{flex:1;max-width:800px;width:100%;margin:0 auto;padding:40px 20px;display:flex;flex-direction:column;gap:20px;overflow-y:auto;max-height:calc(100vh - 200px);scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--brasa-profunda) rgba(255,255,255,.03)}
@@ -79,29 +82,7 @@
 
     <header class="header">
         <div class="logo-container">
-            <svg class="logo-icon" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="goldGradHeader" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#f4e5c2"/>
-                        <stop offset="50%" style="stop-color:#c9a961"/>
-                        <stop offset="100%" style="stop-color:#8b7355"/>
-                    </linearGradient>
-                    <linearGradient id="metalGradHeader" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#5a5a5a"/>
-                        <stop offset="50%" style="stop-color:#3a3a3a"/>
-                        <stop offset="100%" style="stop-color:#2a2a2a"/>
-                    </linearGradient>
-                    <linearGradient id="fireBaseGradHeader" x1="0%" y1="100%" x2="0%" y2="0%">
-                        <stop offset="0%" style="stop-color:#8b2500"/>
-                        <stop offset="50%" style="stop-color:#d4662c"/>
-                        <stop offset="100%" style="stop-color:#ff8c42"/>
-                    </linearGradient>
-                </defs>
-                <path d="M 20 220 L 100 160 L 180 220 Z" fill="url(#fireBaseGradHeader)" opacity="0.9"/>
-                <rect x="70" y="140" width="60" height="60" fill="url(#metalGradHeader)"/>
-                <ellipse cx="100" cy="140" rx="40" ry="12" fill="url(#goldGradHeader)"/>
-                <text x="100" y="118" font-family="Cinzel" font-weight="900" font-size="45" fill="url(#goldGradHeader)" text-anchor="middle">F</text>
-            </svg>
+            <img src="img/logo_forge_prime.png" alt="Forje Prime" class="logo-img">
             <span class="logo-text">FORJE PRIME</span>
         </div>
         <p class="header-subtitle">Forjando Impérios | Pré-Qualificação de Leads</p>
@@ -154,14 +135,14 @@ function validarEmail(email){
 }
 
 const chatFlow=[
-    {type:'bot',text:'Fala! Sou da Forje Prime. Vou ser direto: pra saber se consigo te ajudar a escalar, preciso de 4 dados. Leva menos de 1 minuto. Bora?',delay:500},
+    {type:'bot',text:'Fala! Sou da Forje Prime. Vou ser direto: pra saber se consigo te ajudar a escalar, preciso de 6 dados. Leva menos de 1 minuto. Bora?',delay:500},
     {type:'bot',text:'Qual seu nome?',input:'nome',placeholder:'Digite seu nome',validar:(val)=>{if(val.trim().length<2)return{valido:false,msg:'Nome muito curto. Digite seu nome completo.'};return{valido:true};}},
     {type:'bot',text:'Qual o nome da sua empresa?',input:'empresa',placeholder:'Nome da empresa',validar:(val)=>{if(val.trim().length<2)return{valido:false,msg:'Nome da empresa muito curto.'};return{valido:true};}},
     {type:'bot',text:'Faturamento mensal médio?',options:[{value:'10k-15K',label:'R$ 10K – R$ 15K'},{value:'15k-30k',label:'R$ 15K – R$ 30K'},{value:'30k-100k',label:'R$ 30K – R$ 100K'},{value:'100k+',label:'Acima de R$ 100K'}],field:'faturamento'},
     {type:'bot',text:'Quanto você investe (ou pode investir) em tráfego pago por mês?',options:[{value:'1k-3K',label:'R$ 1K - 3K'},{value:'3k-5K',label:'R$ 3K - 5K'},{value:'5k-10k',label:'R$ 5K – R$ 10K'},{value:'10k-30k',label:'R$ 10K – R$ 30K'},{value:'30k+',label:'Acima de R$ 30K'}],field:'investimento'},
     {type:'bot',text:'WhatsApp com DDD. Só isso, sem pontos ou traços:',input:'whatsapp',placeholder:'11999999999',validar:(val)=>validarWhatsApp(val)},
     {type:'bot',text:'E-mail pra contato:',input:'email',placeholder:'seu@email.com',validar:(val)=>validarEmail(val)},
-    {type:'bot',text:'Perfeito. Analisando seu perfil...',delay:1200}
+    {type:'bot',text:'Perfeito. Analisando seu perfil...',delay:400}
 ];
 
 function scrollToBottom(){
@@ -196,7 +177,7 @@ function addMessage(type,text,isError=false){
     });
 }
 
-function addTyping(delay=700){
+function addTyping(delay=500){
     return new Promise(resolve=>{
         const typingDiv=document.createElement('div');
         typingDiv.className='message bot';
@@ -252,7 +233,7 @@ function addInput(field,placeholder,validador){
             leadData[field]=value;
             currentStep++;
             updateProgress();
-            setTimeout(processNextMessage,300);
+            setTimeout(processNextMessage,200);
         });
     };
     btn.onclick=processar;
@@ -277,7 +258,7 @@ function addOptions(options,field){
                 leadData[field]=opt.value;
                 currentStep++;
                 updateProgress();
-                setTimeout(processNextMessage,300);
+                setTimeout(processNextMessage,200);
             });
         };
         container.appendChild(btn);
@@ -291,12 +272,12 @@ async function processNextMessage(){
     const msg=chatFlow[messageIndex];
     messageIndex++;
     if(msg.type==='bot'){
-        await addTyping(msg.delay||600);
+        await addTyping(msg.delay||400);
         await addMessage('bot',msg.text);
         if(msg.input){addInput(msg.input,msg.placeholder,msg.validar);return;}
         if(msg.options){addOptions(msg.options,msg.field);return;}
-        if(messageIndex>=chatFlow.length){setTimeout(finish,800);}
-        else{setTimeout(processNextMessage,200);}
+        if(messageIndex>=chatFlow.length){setTimeout(finish,300);}
+        else{setTimeout(processNextMessage,150);}
     }
 }
 
@@ -304,12 +285,11 @@ function finish(){
     progressBar.style.width='100%';
     window.dataLayer=window.dataLayer||[];
     window.dataLayer.push({event:'lead_submit_attempt',lead_nome:leadData.nome,lead_empresa:leadData.empresa});
+    showFinalScreen();
     sendLeadAjax().then(()=>{
         window.dataLayer.push({event:'generate_lead',currency:'BRL',value:1,lead_nome:leadData.nome,lead_empresa:leadData.empresa,lead_whatsapp:leadData.whatsapp,lead_email:leadData.email,lead_faturamento:leadData.faturamento,lead_investimento:leadData.investimento,lead_id:Date.now()});
-        showFinalScreen();
     }).catch(err=>{
         console.error('Erro ao enviar:',err);
-        showFinalScreen();
     });
 }
 
@@ -340,7 +320,7 @@ function showFinalScreen(){
 }
 
 updateProgress();
-setTimeout(processNextMessage,400);
+setTimeout(processNextMessage,300);
     </script>
 </body>
 </html>

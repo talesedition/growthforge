@@ -53,6 +53,26 @@ body {
     width: 100%;
 }
 
+/* Logo Images */
+.logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
+    transition: var(--transicao);
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 8px rgba(201, 169, 97, 0.4));
+}
+
+.logo-img-footer {
+    height: 60px;
+    width: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
 /* Text Utilities */
 .text-gold { color: var(--ouro-forjado); }
 .text-fire { color: var(--chama-viva); }

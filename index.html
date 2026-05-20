@@ -6,6 +6,9 @@
     <title>Forje Prime | Forjando Impérios</title>
     <meta name="description" content="Estruturamos o marketing de negócios locais para gerar clientes com previsibilidade. Tráfego pago, conteúdo estratégico e design que converte.">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/logo_forge_prime.png">
+
     <!-- Preconnects críticos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,8 +35,8 @@
         .navbar{position:fixed;top:0;width:100%;z-index:1000;padding:15px 0;background:transparent;transition:all .3s}
         .navbar.scrolled{background:rgba(10,10,10,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,169,97,.2);padding:10px 0}
         .navbar .container{display:flex;justify-content:space-between;align-items:center}
-        .logo{display:flex;align-items:center;gap:10px}
-        .logo svg{width:40px;height:48px}
+        .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+        .logo-img{height:40px;width:auto;display:block}
         .logo-text{font-family:'Cinzel',serif;font-weight:900;font-size:1.2rem;background:linear-gradient(135deg,#C9A961,#ff8c42);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:2px}
         .nav-links{display:flex;list-style:none;gap:30px;align-items:center}
         .nav-links a{color:#f5f5f5;text-decoration:none;font-weight:500;font-size:.9rem;transition:all .3s;position:relative}
@@ -74,7 +77,6 @@
 
     <base target="_blank">
 <base target="_blank">
-<base target="_blank">
 </head>
 <body>
     <!-- Google Tag Manager (deferred) -->
@@ -92,32 +94,10 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
-            <div class="logo">
-                <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" width="40" height="48">
-                    <defs>
-                        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#f4e5c2"/>
-                            <stop offset="50%" style="stop-color:#c9a961"/>
-                            <stop offset="100%" style="stop-color:#8b7355"/>
-                        </linearGradient>
-                        <linearGradient id="metalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#5a5a5a"/>
-                            <stop offset="50%" style="stop-color:#3a3a3a"/>
-                            <stop offset="100%" style="stop-color:#2a2a2a"/>
-                        </linearGradient>
-                        <linearGradient id="fireBaseGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-                            <stop offset="0%" style="stop-color:#8b2500"/>
-                            <stop offset="50%" style="stop-color:#d4662c"/>
-                            <stop offset="100%" style="stop-color:#ff8c42"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M 20 220 L 100 160 L 180 220 Z" fill="url(#fireBaseGrad)" opacity="0.9"/>
-                    <rect x="70" y="140" width="60" height="60" fill="url(#metalGrad)"/>
-                    <ellipse cx="100" cy="140" rx="40" ry="12" fill="url(#goldGrad)"/>
-                    <text x="100" y="118" font-family="Cinzel" font-weight="900" font-size="45" fill="url(#goldGrad)" text-anchor="middle">F</text>
-                </svg>
+            <a href="#home" class="logo" onclick="gtag('event','click_logo',{'event_category':'navigation','event_label':'header_logo'});">
+                <img src="img/logo_forge_prime.png" alt="Forje Prime" class="logo-img">
                 <span class="logo-text">FORJE PRIME</span>
-            </div>
+            </a>
 
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
                 <i class="fas fa-bars"></i>
@@ -555,19 +535,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="logo">
-                        <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" width="60" height="72">
-                            <defs>
-                                <linearGradient id="goldGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#c9a961"/>
-                                    <stop offset="100%" style="stop-color:#8b7355"/>
-                                </linearGradient>
-                            </defs>
-                            <path d="M 20 220 L 100 160 L 180 220 Z" fill="#d4662c"/>
-                            <rect x="70" y="140" width="60" height="60" fill="#2c2c2c"/>
-                            <ellipse cx="100" cy="140" rx="40" ry="12" fill="url(#goldGradFooter)"/>
-                            <text x="100" y="118" font-family="Cinzel" font-weight="900" font-size="45" fill="url(#goldGradFooter)" text-anchor="middle">F</text>
-                        </svg>
-                        <span>FORJE PRIME</span>
+                        <img src="img/logo_forge_prime.png" alt="Forje Prime" class="logo-img-footer">
                     </div>
                     <p>Forjando impérios digitais desde 2022. Estratégia, execução e resultado.</p>
                 </div>
